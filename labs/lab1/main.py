@@ -1,5 +1,7 @@
 import json
 import ast
+import glob
+import pandas as pd
 
 # Saves data from dictionary/list into json file
 def save_file(filepath, data):
@@ -20,7 +22,20 @@ def read_json_file(filepath):
         json_data = json.load(file)
     return json_data
 
+def chemas_a_hoe():
+    files = glob.glob("data/train/*.txt")
+    for f in files:
+        data = read_txt_file(f)
+        action = data['type']
+        seq = [{**s['data'], **{'time': s['time']}} for s in data['seq']]
+        df = pd.DataFrame(seq)
+        print(action)
+        print("x=%d, y=%d, z=%d" % (df['xAccl'].std(), df['yAccl'].std(),df['zAccl'].std()))
+
+
+
+
+
 if __name__ == "__main__":
-    filepath = "data/train/activity-team1-Driving-0.txt"
-    data = read_file(filepath)
-    save_file("output.json",data)
+    chemas_a_hoe()
+    
