@@ -24,10 +24,9 @@ def read_json_file(filepath):
         json_data = json.load(file)
     return json_data
 
+# calculates the speed of a (predicted) driving activity by integrating the acceleration
 def calculate_speed(df):
     times = df["time"]
-#     print(times)
-#     print(type(times))
     dts = []
     for i in range(1, len(times)):
         dts.append(times[i]-times[i-1])
@@ -39,7 +38,7 @@ def calculate_speed(df):
     for i in range(len(acc)):
         speed += acc[i] * dts[i]
     speed /= times[len(times)-1] - times[0]
-    # print(sum)
+
     return speed
 
 
@@ -69,7 +68,7 @@ def classify(path):
             zg = df['zGyro'].std()
 
             speed = ""
-
+            # Our prediction based on standard deviation thresholds
             if z > 600:
                 pred = 'Jumping'
             
