@@ -5,11 +5,6 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import sys
 
-# Saves data from dictionary/list into json file
-def save_file(filepath, data):
-    with open(filepath, 'w') as outfile:
-        json.dump(data, outfile, indent=2)
-
 # reads json formatted data from text file
 # NOTE: DO NOT LOAD JSON FILE WITH THIS FUNCTION
 def read_txt_file(filepath):
@@ -18,28 +13,31 @@ def read_txt_file(filepath):
         json_data = ast.literal_eval(text_data)
     return json_data
 
-# reads json formatted data from json file
-def read_json_file(filepath):
-    with open(filepath,'r') as file:
-        json_data = json.load(file)
-    return json_data
-
 # calculates the speed of a (predicted) driving activity by integrating the acceleration
 def calculate_speed(df):
     times = df["time"]
+#     print(times)
+#     print(type(times))
     dts = []
     for i in range(1, len(times)):
         dts.append(times[i]-times[i-1])
-    acc = []
+    x_vel = [0]
+    y_vel = [0]
     for i in range(1, len(df["xAccl"])):
-        a = ((df["xAccl"][i] * 0.732) ** 2 + (df["yAccl"][i] * 0.732) ** 2) ** 0.5
-        acc.append(a)
-    speed = 0
-    for i in range(len(acc)):
-        speed += acc[i] * dts[i]
-    speed /= times[len(times)-1] - times[0]
-
-    return speed
+        xv = df["xAccl"][i-1] * 0.732 * dts[i-1] + x_vel[i-1]
+        yv = df["yAccl"][i-1] * 0.732 * dts[i-1] + y_vel[i-1]
+        x_vel.append(xv)
+        y_vel.append(yv)
+    speeds = []
+    for i in range(len(x_vel)):
+        s = ((x_vel[i] ** 2) + (y_vel[i] ** 2)) ** 0.5
+        speeds.append(s)
+    dist = 0
+    for i in range(1, len(speeds)):
+        dist += speeds[i] * dts[i-1]
+    avg_speed = dist / (times[len(times) -1] - times[0])
+    # print(avg_speed)
+    return avg_speed
 
 
 # classifies all activities files in a path
