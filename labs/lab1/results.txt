@@ -1,0 +1,24 @@
+activity-1.txt : prediction = Jumping 
+activity-2.txt : prediction = Driving (speed = 63.126006 mm/s)
+activity-3.txt : prediction = Driving (speed = 67.234898 mm/s)
+activity-4.txt : prediction = Standing 
+activity-5.txt : prediction = Standing 
+activity-6.txt : prediction = Standing 
+activity-7.txt : prediction = Walking 
+activity-8.txt : prediction = Walking 
+activity-9.txt : prediction = Driving (speed = 137.966912 mm/s)
+activity-10.txt : prediction = Standing 
+activity-11.txt : prediction = Jumping 
+activity-12.txt : prediction = Jumping 
+activity-13.txt : prediction = Standing 
+activity-14.txt : prediction = Standing 
+activity-15.txt : prediction = Walking 
+activity-16.txt : prediction = Walking 
+activity-17.txt : prediction = Driving (speed = 139.437560 mm/s)
+activity-18.txt : prediction = Jumping 
+activity-19.txt : prediction = Walking 
+activity-20.txt : prediction = Driving (speed = 76.831136 mm/s)
+activity-21.txt : prediction = Driving (speed = 85.717038 mm/s)
+activity-22.txt : prediction = Jumping 
+activity-23.txt : prediction = Jumping 
+activity-24.txt : prediction = Walking 
